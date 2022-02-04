@@ -4,7 +4,7 @@ import {Paper, Table, TableHead, TableRow, TableCell, TableContainer, TableBody,
 export default function CalculatorHistory({history, error})
 {
     useEffect(()=>{
-        console.log(history.length);
+        
     }, [history])
 
     return (
@@ -22,16 +22,27 @@ export default function CalculatorHistory({history, error})
                   </TableRow>
                 </TableHead>
                 <TableBody sx={{ width: '100%', overflow: 'hidden' }}>
-                  {error && <Typography color='red' padding={2}>{error}</Typography>}
-                  {!error && history.map((row, index) => (
-                    <CalculationResultItem key={`result-${index}`} calculationResult={row}/>
-                  ))}
+                  {error ?
+                    <ErrorRow error={error}/> :
+                    history.map((row, index) => (
+                      <CalculationResultItem key={`result-${index}`} calculationResult={row}/>
+                    ))
+                  }
                 </TableBody>
               </Table>
             </TableContainer>
         </Stack>
     
     )
+}
+
+function ErrorRow({error})
+{
+  return (
+    <TableRow>
+      <TableCell><Typography color='red' padding={1}>{error}</Typography></TableCell>
+    </TableRow>
+  )
 }
 
 function CalculationResultItem({calculationResult})
