@@ -1,6 +1,6 @@
-﻿namespace Assignment
+﻿namespace Assignment.Services
 {
-    public static class CommentsMapper
+    public class CommentsMapper : ICommentsMapper
     {
         private static readonly SortedDictionary<decimal, string> Comments = new()
         {
@@ -10,7 +10,12 @@
             {1000000000, "Earth explodes" }
         };
 
-        public static string GetComment(decimal energy)
+        /// <summary>
+        /// Map comments to kinetic energy threshold dictionary
+        /// </summary>
+        /// <param name="energy">Kinetic energy of an object (J)</param>
+        /// <returns>Comment for given kinetic energy</returns>
+        public string GetComment(decimal energy)
         {
             return Comments
                 .Where(x=> energy>=x.Key)

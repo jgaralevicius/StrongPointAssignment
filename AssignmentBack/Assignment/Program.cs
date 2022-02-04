@@ -1,4 +1,5 @@
 using Assignment.DataAccess;
+using Assignment.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -24,6 +25,8 @@ services.AddDbContext<DatabaseContext>(options =>
 services.AddControllers();
 services.AddEndpointsApiExplorer();
 services.AddSwaggerGen();
+services.AddSingleton<ICalculator>(new Calculator());
+services.AddSingleton<ICommentsMapper>(new CommentsMapper());
 
 var app = builder.Build();
 

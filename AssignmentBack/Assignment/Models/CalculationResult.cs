@@ -9,14 +9,14 @@
         public decimal Energy { get; }
         public string Comment { get; }
 
-        public CalculationResult(decimal mass, decimal velocity, DateTime dateCreated)
+        public CalculationResult(decimal mass, decimal velocity, decimal energy, string comment, DateTime dateCreated)
         {
             Mass = mass;
             Velocity = velocity;
             DateCreated = dateCreated;
 
-            Energy = Calculator.CalculateKineticEnergy(mass, velocity);
-            Comment = CommentsMapper.GetComment(Energy);
+            Energy = energy;
+            Comment = comment;
         }
     }
 }
